@@ -6,7 +6,7 @@ import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { motion } from "motion/react";
 import { toast } from "sonner";
 
-interface FormData {
+interface CheckoutFormData {
   // Dados pessoais
   fullName: string;
   email: string;
@@ -34,7 +34,7 @@ export function Checkout() {
   const { items, getTotalPrice, clearCart } = useCart();
   const navigate = useNavigate();
   const [step, setStep] = useState<1 | 2 | 3>(1);
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<CheckoutFormData>({
     fullName: "",
     email: "",
     phone: "",
@@ -60,7 +60,7 @@ export function Checkout() {
     }).format(price);
   };
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
+  const handleInputChange = (field: keyof CheckoutFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 

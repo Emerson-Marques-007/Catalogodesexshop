@@ -5,7 +5,6 @@ import { products } from "../data/products";
 import { ProductCard } from "../components/ProductCard";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { useCart } from "../contexts/CartContext";
-import { motion } from "motion/react";
 
 export function ProductDetail() {
   const { id } = useParams();

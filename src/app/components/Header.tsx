@@ -1,21 +1,23 @@
 import { Link, useLocation, useNavigate } from "react-router";
 import { useState } from "react";
-import { Search, ShoppingBag, Menu, X, Heart } from "lucide-react";
-import logoLight from "figma:asset/bda2e3713b427a64eeb4bc8d887ca64de0784dd3.png";
-import logoDark from "figma:asset/0466e0015d268c3edb1e92aeadc98a8983f906dc.png";
+import { Search, ShoppingBag, Menu, X, Heart, User, LogOut, Shield } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useSearch } from "../contexts/SearchContext";
+import { useAuth } from "../contexts/AuthContext";
 import { CartDrawer } from "./CartDrawer";
+import { BRAND_IMAGES } from "../config/images";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === "/";
   const { getTotalItems } = useCart();
   const { searchTerm, setSearchTerm } = useSearch();
+  const { user, isAdmin, logout } = useAuth();
 
   const handleSearch = (value: string) => {
     setSearchTerm(value);
@@ -23,6 +25,12 @@ export function Header() {
     if (value && location.pathname !== "/catalogo") {
       navigate("/catalogo");
     }
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    setUserMenuOpen(false);
+    navigate("/");
   };
 
   const navLinks = [
@@ -47,7 +55,11 @@ export function Header() {
 
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
-              <img src={logoDark} alt="Lujuria" className="h-8 sm:h-10 w-auto" />
+              <img
+                src={isHome ? BRAND_IMAGES.logoLight : BRAND_IMAGES.logoDark}
+                alt="Lujuria"
+                className="h-8 sm:h-10 w-auto"
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -92,6 +104,69 @@ export function Header() {
                   </span>
                 )}
               </button>
+              
+              {/* User Menu */}
+              {user ? (
+                <div className="relative">
+                  <button
+                    onClick={() => setUserMenuOpen(!userMenuOpen)}
+                    className="text-[#F5D5D9] hover:text-white transition-colors flex items-center gap-2"
+                  >
+                    <User className="w-5 h-5" />
+                    <span className="hidden md:block text-sm">{user.name.split(' ')[0]}</span>
+                  </button>
+                  
+                  {userMenuOpen && (
+                    <>
+                      <div 
+                        className="fixed inset-0 z-40" 
+                        onClick={() => setUserMenuOpen(false)}
+                      />
+                      <div className="absolute right-0 mt-2 w-48 bg-[#2D0A17] border border-white/20 rounded-lg shadow-xl z-50">
+                        <div className="p-3 border-b border-white/10">
+                          <p className="text-white font-medium text-sm">{user.name}</p>
+                          <p className="text-white/60 text-xs">{user.email}</p>
+                        </div>
+                        <div className="py-1">
+                          <Link
+                            to="/perfil"
+                            onClick={() => setUserMenuOpen(false)}
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-[#F5D5D9] hover:bg-white/10 transition-colors"
+                          >
+                            <User className="w-4 h-4" />
+                            Meu Perfil
+                          </Link>
+                          {isAdmin && (
+                            <Link
+                              to="/admin"
+                              onClick={() => setUserMenuOpen(false)}
+                              className="flex items-center gap-2 px-4 py-2 text-sm text-[#F5D5D9] hover:bg-white/10 transition-colors"
+                            >
+                              <Shield className="w-4 h-4" />
+                              Painel Admin
+                            </Link>
+                          )}
+                          <button
+                            onClick={handleLogout}
+                            className="w-full flex items-center gap-2 px-4 py-2 text-sm text-[#F5D5D9] hover:bg-white/10 transition-colors"
+                          >
+                            <LogOut className="w-4 h-4" />
+                            Sair
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  className="text-[#F5D5D9] hover:text-white transition-colors flex items-center gap-1 text-sm"
+                >
+                  <User className="w-5 h-5" />
+                  <span className="hidden md:block">Entrar</span>
+                </Link>
+              )}
             </div>
           </div>
 
@@ -130,6 +205,27 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
+              {user && (
+                <>
+                  <hr className="border-white/10 my-2" />
+                  <Link
+                    to="/perfil"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="py-2 text-sm tracking-wider uppercase text-[#F5D5D9]/80 hover:text-white"
+                  >
+                    Meu Perfil
+                  </Link>
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="py-2 text-sm tracking-wider uppercase text-[#F5D5D9]/80 hover:text-white"
+                    >
+                      Painel Admin
+                    </Link>
+                  )}
+                </>
+              )}
             </nav>
           </div>
         )}

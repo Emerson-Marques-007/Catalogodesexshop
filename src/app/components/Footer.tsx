@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
-import logoBadge from "figma:asset/43bd0da9c26e18fd373b8595cf486e458edf62cd.png";
+import { BRAND_IMAGES } from "../config/images";
 
 export function Footer() {
   return (
@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <img src={logoBadge} alt="Lujuria" className="w-20 h-20 mb-4" />
+            <img src={BRAND_IMAGES.logoBadge} alt="Lujuria" className="w-20 h-20 mb-4" />
             <p className="text-[#F5D5D9]/70 text-sm mb-4" style={{ lineHeight: "1.6" }}>
               Liberte seus desejos com produtos selecionados para tornar seus momentos inesquecíveis.
             </p>

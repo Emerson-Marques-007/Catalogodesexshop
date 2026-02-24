@@ -1,37 +1,30 @@
 import { Link } from "react-router";
 import { ArrowRight, Truck, Shield, Gift, Clock } from "lucide-react";
+import { products, categories } from "../data/products";
 import { ProductCard } from "../components/ProductCard";
 import { CategoryCard } from "../components/CategoryCard";
-import { categories, products } from "../data/products";
-import { ImageWithFallback } from "../components/figma/ImageWithFallback";
-
-import logoDark from "figma:asset/0466e0015d268c3edb1e92aeadc98a8983f906dc.png";
-import tagline from "figma:asset/f92c5dcdaad7a6d756c87da306926cbc3efc03cd.png";
-import brandArt from "figma:asset/9977de7bcfe2aebfc386c8cc27cf232e6c29ee99.png";
-import brandPattern from "figma:asset/a149cf98651bbd922bd797d0193992389c849147.png";
-import brandIcons from "figma:asset/2b39a4db8237453a5f749c8bcb98119fb3c9f474.png";
+import { BRAND_IMAGES } from "../config/images";
 
 export function Home() {
   const featuredProducts = products.filter((p) => p.badge).slice(0, 4);
-  const newProducts = products.filter((p) => p.badge === "Novo");
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-[#C3001A] overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <img src={brandPattern} alt="" className="w-full h-full object-cover" />
+          <img src={BRAND_IMAGES.brandPattern} alt="" className="w-full h-full object-cover" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32 relative">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <div className="text-center lg:text-left">
               <img
-                src={logoDark}
+                src={BRAND_IMAGES.logoDark}
                 alt="Lujuria"
                 className="h-12 sm:h-16 w-auto mb-6 mx-auto lg:mx-0"
               />
               <img
-                src={tagline}
+                src={BRAND_IMAGES.tagline}
                 alt="Liberte seus desejos"
                 className="h-14 sm:h-20 lg:h-24 w-auto mb-8 mx-auto lg:mx-0"
               />
@@ -56,7 +49,7 @@ export function Home() {
             </div>
             <div className="hidden lg:flex justify-center">
               <img
-                src={brandArt}
+                src={BRAND_IMAGES.brandArt}
                 alt="Lujuria Art"
                 className="w-72 h-auto rounded-2xl shadow-2xl"
               />
@@ -142,11 +135,11 @@ export function Home() {
       {/* Brand Banner */}
       <section className="relative py-20 sm:py-28 bg-[#F5D5D9] overflow-hidden">
         <div className="absolute left-0 top-0 bottom-0 w-1/3 opacity-10">
-          <img src={brandPattern} alt="" className="w-full h-full object-cover" />
+          <img src={BRAND_IMAGES.brandPattern} alt="" className="w-full h-full object-cover" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="max-w-2xl mx-auto text-center">
-            <img src={brandIcons} alt="Lujuria" className="h-10 sm:h-14 w-auto mx-auto mb-6 opacity-60" />
+            <img src={BRAND_IMAGES.brandIcons} alt="Lujuria" className="h-10 sm:h-14 w-auto mx-auto mb-6 opacity-60" />
             <h2
               className="text-[#2D0A17] mb-4"
               style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", lineHeight: "1.3" }}

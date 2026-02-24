@@ -1,9 +1,6 @@
 import { Link } from "react-router";
 import { ArrowRight, Heart, Sparkles, Shield, Users } from "lucide-react";
-import logoBadge from "figma:asset/43bd0da9c26e18fd373b8595cf486e458edf62cd.png";
-import brandArt from "figma:asset/9977de7bcfe2aebfc386c8cc27cf232e6c29ee99.png";
-import tagline from "figma:asset/f92c5dcdaad7a6d756c87da306926cbc3efc03cd.png";
-import brandPattern from "figma:asset/a149cf98651bbd922bd797d0193992389c849147.png";
+import { BRAND_IMAGES } from "../config/images";
 
 export function About() {
   return (
@@ -11,10 +8,10 @@ export function About() {
       {/* Hero */}
       <div className="relative bg-[#C3001A] py-16 sm:py-24 overflow-hidden">
         <div className="absolute inset-0 opacity-15">
-          <img src={brandPattern} alt="" className="w-full h-full object-cover" />
+          <img src={BRAND_IMAGES.brandPattern} alt="" className="w-full h-full object-cover" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
-          <img src={logoBadge} alt="Lujuria" className="w-24 h-24 mx-auto mb-6" />
+          <img src={BRAND_IMAGES.logoBadge} alt="Lujuria" className="w-24 h-24 mx-auto mb-6" />
           <h1 className="text-white mb-4" style={{ fontFamily: "'Playfair Display', serif", fontSize: "2.5rem", lineHeight: "1.2" }}>
             Nossa História
           </h1>
@@ -30,7 +27,7 @@ export function About() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <img
-                src={brandArt}
+                src={BRAND_IMAGES.brandArt}
                 alt="Lujuria Art"
                 className="w-full max-w-sm mx-auto rounded-2xl shadow-lg"
               />
@@ -46,7 +43,7 @@ export function About() {
               <p className="text-[#6B3A4A] mb-6" style={{ lineHeight: "1.8" }}>
                 Cada produto em nosso catálogo é cuidadosamente selecionado, priorizando qualidade, segurança e design. Trabalhamos com as melhores marcas nacionais e internacionais para garantir experiências inesquecíveis.
               </p>
-              <img src={tagline} alt="Liberte seus desejos" className="h-12 w-auto" />
+              <img src={BRAND_IMAGES.tagline} alt="Liberte seus desejos" className="h-12 w-auto" />
             </div>
           </div>
         </div>

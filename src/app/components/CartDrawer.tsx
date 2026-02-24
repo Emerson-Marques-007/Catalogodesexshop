@@ -1,5 +1,5 @@
 import { useCart } from "../contexts/CartContext";
-import { X, Plus, Minus, ShoppingBag, Trash2 } from "lucide-react";
+import { Plus, Minus, ShoppingBag, Trash2 } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
